@@ -16,7 +16,7 @@ our search value. So the search algorithm stops.
 When given the value of 16 to be searched, the function calculated the midpoint (11), and because the value is greater than the midpoint, the end index will continue to
 shift left until the value is found. Because the value does not exist in the array, the function will return a value of -1.
 */ 
-import BinarySearchTree from './binarysearch';
+const BinaryTree = require('./binarysearch')
 
 let books = [
   { author: 'Cowlishaw, Mike', dewey: '005.133', title: 'The REXX Language' },
@@ -35,18 +35,15 @@ function deweySearch(books, dewey, title){
     const keys = Object.keys(books[1]);
     //console.log(keys);
     books.forEach(book => {
-        //console.log(book[keys[1]] );
         if(book[keys[1]] === dewey && book[keys[2]] === title){
-
-            //console.log(book);
         }
         
     });
 
   
 }
-
 deweySearch(books, '005.133', 'The REXX Language');
+
 function binarySearch(array, value, start, end) {
     var start = start === undefined ? 0 : start;
     var end = end === undefined ? array.length : end;
@@ -70,11 +67,34 @@ function binarySearch(array, value, start, end) {
     }
 };
 
-function treeTraversals(){
-    let BST = new BinarySearchTree();
-    BST.insert(25, 29);
-    BST.insert(15, 16);
-    console.log(BST);
+function best_profit(prices) {
+    if (!prices.length) return 0;
+
+    var buy = prices[0], sell = prices[0], profit = 0;
+    for (var i = 1; i < prices.length; ++i) {
+        sell = prices[i];
+        if (sell < buy) buy = sell;
+        if (sell - buy > profit) profit = sell - buy;
+    }
+    return profit;
 }
 
-//treeTraversals();
+
+function main(){
+    let data = [25, 15, 50, 10, 24, 35, 70, 4, 12, 18, 31, 44, 66, 90, 22]
+    let BST = new BinaryTree();
+
+    for (let i=0; i<data.length; i++) {
+        BST.insert(data[i], data[i])
+    }
+
+    console.log(BST.inOrder());
+    BST.preOrder();
+    BST.postOrder();
+    //console.log(BST);
+
+    let prices = [128, 97, 121, 123, 98, 97, 105]
+    best_profit(prices);
+}
+main();
+

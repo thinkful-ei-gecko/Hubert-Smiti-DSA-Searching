@@ -6,7 +6,7 @@ class BinarySearchTree {
     this.left = null;
     this.right = null;
   }
-​
+
   insert(key, value) {
     if (this.key == null) {
       this.key = key;
@@ -29,7 +29,7 @@ class BinarySearchTree {
       }
     }
   }
-​
+
   find(key) {
     if (this.key == key) {
       return this.value;
@@ -44,7 +44,7 @@ class BinarySearchTree {
       throw new Error('No key found')
     }
   }
-​
+
   remove(key) {
     if (this.key == key) {
       if (this.left && this.right) {
@@ -73,7 +73,7 @@ class BinarySearchTree {
       throw new Error('Key Error')
     }
   }
-​
+
   _replaceWith(node) {
     if (this.parent) {
       if (this == this.parent.left) {
@@ -101,7 +101,39 @@ class BinarySearchTree {
       }
     }
   }
-​
+
+  inOrder() {
+    if(this.left) {
+      this.left.inOrder()
+    }
+    console.log(this.key)
+
+    if(this.right) {
+      this.right.inOrder();
+    }
+  }
+
+  preOrder() {
+    console.log(this.key)
+
+    if(this.left) {
+      this.left.preOrder();
+    }
+    if(this.right) {
+      this.right.preOrder();
+    }
+  }
+
+  postOrder() {
+    if(this.left) {
+      this.left.postOrder();
+    }
+    if(this.right) {
+      this.right.postOrder();
+    }
+    console.log(this.key)
+  }
+
   _findMin() {
     if (!this.left) {
       return this;
@@ -110,5 +142,4 @@ class BinarySearchTree {
   }
 }
 
-
-export default BinarySearchTree;
+module.exports =  BinarySearchTree;
