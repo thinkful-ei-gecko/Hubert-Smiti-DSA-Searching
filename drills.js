@@ -31,18 +31,50 @@ let books = [
   { author: 'Norris, Chuck', dewey: '796.8092', title: 'The Official Chuck Norris Fact Book' }
 ];
 
+//Iterative Solution
 function deweySearch(books, dewey, title){
     const keys = Object.keys(books[1]);
     //console.log(keys);
     books.forEach(book => {
         if(book[keys[1]] === dewey && book[keys[2]] === title){
-        }
-        
+        } 
     });
-
-  
 }
 deweySearch(books, '005.133', 'The REXX Language');
+
+//Recursive Binary Search Solution
+function recursiveDewey(books, dewey, title) {
+    let start = 0;
+    let end = books.length;
+
+    while (start < end) {
+        let mid = Math.floor((start + end) / 2);
+
+        if(books[mid].dewey === dewey) {
+            if(books[mid].title === title) {
+                return books[mid]
+            }
+            for(let i=mid + 1; books[i].dewey === dewey; i++) {
+                if(books[i].title === title) {
+                    return books[i]
+                }
+            }
+            for(let i=mid - 1; books[i].dewey === dewey; i--) {
+                if(books[i].title === title) {
+                    return books[i]
+                }
+            }
+            return null;
+        }
+        if(books[mid].dewey < dewey) {
+            start = mid + 1;
+        } else {
+            end = mid - 1;
+        }
+    }
+    return null;
+}
+recursiveDewey(books, '005.133', 'The REXX Language');
 
 function binarySearch(array, value, start, end) {
     var start = start === undefined ? 0 : start;
